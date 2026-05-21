@@ -5,6 +5,18 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
+  "author": "David Bellaiche",
+  "homepage": "https://mcpward.redfleet.fr",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dbe006/mcpward-sdk.git",
+    "directory": "typescript"
+  },
+  "bugs": {
+    "url": "https://github.com/dbe006/mcpward-sdk/issues"
+  },
+  "keywords": ["mcp", "mcpward", "gateway", "sdk", "agent", "claude", "cursor"],
+  "files": ["dist", "README.md"],
   "scripts": {
     "build": "tsc",
     "test": "node --test dist/test.js"
