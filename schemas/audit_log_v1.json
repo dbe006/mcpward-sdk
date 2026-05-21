@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcpward.redfleet.fr/schemas/audit-log-v1.json",
+  "title": "mcpward Signed Audit Log Record v1",
+  "description": "Schema for Ed25519-signed audit log records produced by mcpward gateway.",
+  "type": "object",
+  "required": [
+    "version",
+    "id",
+    "timestamp",
+    "key_id",
+    "server",
+    "status",
+    "latency_ms",
+    "signature"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1",
+      "description": "Schema version."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^ar_[a-f0-9]+$",
+      "description": "Unique audit record identifier."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp of the request."
+    },
+    "key_id": {
+      "type": "string",
+      "description": "API key ID or x402 payment identifier."
+    },
+    "server": {
+      "type": "string",
+      "description": "Name of the upstream MCP server."
+    },
+    "method": {
+      "type": ["string", "null"],
+      "description": "JSON-RPC method called (e.g., tools/call)."
+    },
+    "tool": {
+      "type": ["string", "null"],
+      "description": "Tool name if method is tools/call."
+    },
+    "params_hash": {
+      "type": ["string", "null"],
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "SHA-256 hash of params for privacy."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["success", "error", "denied", "rate_limited", "quota_exceeded", "upstream_error"],
+      "description": "Outcome of the request."
+    },
+    "latency_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total processing time in milliseconds."
+    },
+    "policy_decision": {
+      "type": ["string", "null"],
+      "enum": ["allow", "deny", null],
+      "description": "RBAC policy evaluation result."
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^ed25519:.+$",
+      "description": "Ed25519 signature (base64) of all fields except this one."
+    }
+  },
+  "additionalProperties": false
+}

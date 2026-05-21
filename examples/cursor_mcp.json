@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "mcpward": {
+      "transport": "streamable-http",
+      "url": "https://mcpward.redfleet.fr/mcp",
+      "headers": {
+        "Authorization": "Bearer mw_sk_YOUR_API_KEY_HERE"
+      }
+    }
+  }
+}
